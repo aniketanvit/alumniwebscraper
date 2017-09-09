@@ -21,6 +21,7 @@ class WebScraper(object):
 
     def scrape(self, filename):
         output_file_path = self._get_output_file_path_for(filename)
+        count = 0
         try:
             with open (filename, 'rb') as input_file:
                 with open (output_file_path, 'wb') as output_file:
@@ -34,6 +35,8 @@ class WebScraper(object):
                             #
                             links = self.search_handler.get_first10_search_results(alumni_name)
                             output_file_writer.writerow(links)
+                            count += 1
+                            print 'Scraping completed for {0} alumni'.format(count)
                         except IOError:
                             raise IOError("Scraper has been blocked by the search engine...")
                         except Exception as e:
