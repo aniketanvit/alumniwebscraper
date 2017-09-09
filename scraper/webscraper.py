@@ -28,7 +28,7 @@ class WebScraper(object):
                     alumni_list = csv.reader (input_file, delimiter=',')
                     output_file_writer = csv.writer(output_file, delimiter=',')
                     for row in alumni_list:
-                        alumni_name = row[0]
+                        alumni_name = row[0].decode('ascii', 'ignore')
                         try:
                             # Necessary to keep scraper from blocking the IP
                             time.sleep(self._get_random_sleep_time())
