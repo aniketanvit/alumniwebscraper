@@ -11,7 +11,8 @@ def main(args):
     alumni_scraper = webscraper.WebScraper(
         webrequesthandler.WebRequestHandler(
             GOOGLE,
-            webrequestrandomizer.WebRequestRandomizer()
+            webrequestrandomizer.WebRequestRandomizer(),
+            '//h3/a/@href'
         )
     )
     alumni_scraper.scrape(args[1])

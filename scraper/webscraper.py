@@ -28,13 +28,14 @@ class WebScraper(object):
                     alumni_list = csv.reader (input_file, delimiter=',')
                     output_file_writer = csv.writer(output_file, delimiter=',')
                     for row in alumni_list:
-                        alumni_name = row[0].decode('ascii', 'ignore')
+                        alumni_name = str(row[0].decode('utf-8', 'ignore'))
                         try:
-                            # Necessary to keep scraper from blocking the IP
+                            # Necessary to keep search-engine from blocking the IP
                             time.sleep(self._get_random_sleep_time())
                             #
-                            links = self.search_handler.get_first10_search_results(alumni_name)
-                            output_file_writer.writerow(links)
+                            links = self.search_handler.get_top10_links(alumni_name)
+                            for link in links:
+                                output_file_writer.writerow(link)
                             count += 1
                             print 'Scraping completed for {0} alumni'.format(count)
                         except IOError:
